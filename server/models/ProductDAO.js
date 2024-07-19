@@ -19,7 +19,7 @@ const ProductDAO = {
     return result;
   },
   async update(product) {
-    const newvalues = { name: product.name, price: product.price, image: product.image, category: product.category };
+    const newvalues = { name: product.name, price: product.price, image: product.image, category: product.category }; //co the add them imageDetails: product.imageDetails,
     const result = await Models.Product.findByIdAndUpdate(product._id, newvalues, { new: true });
     return result;
   },
@@ -61,6 +61,11 @@ const ProductDAO = {
     const query = { name: { $regex: new RegExp(keyword, "i") } };
     const products = await Models.Product.find(query).exec();
     return products;
+  },
+  async selectByCount(){
+    const query = {};
+    const noProducts = await Models.Product.find(query).count().exec();
+    return noProducts;
   }
 };
 module.exports = ProductDAO;

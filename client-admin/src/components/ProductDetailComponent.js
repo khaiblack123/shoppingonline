@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import MyContext from '../contexts/MyContext';
-
+import './ProductDetail.css'
 class ProductDetail extends Component {
   static contextType = MyContext; // using this.context to access global state
   constructor(props) {
@@ -12,7 +12,8 @@ class ProductDetail extends Component {
       txtName: '',
       txtPrice: 0,
       cmbCategory: '',
-      imgProduct: '',
+      imgProduct: ''
+      // imgDetails:[] 
     };
   }
   render() {
@@ -24,42 +25,53 @@ class ProductDetail extends Component {
       }
     });
     return (
-      <div className="float-right">
-        <h2 className="text-center">PRODUCT DETAIL</h2>
+      <div className="product-detail-container">
+        <h2 className="product-detail-title text-center">PRODUCT DETAIL</h2>
         <form>
-          <table>
+          <table className="product-detail-table">
             <tbody>
               <tr>
                 <td>ID</td>
-                <td><input type="text" value={this.state.txtID} onChange={(e) => { this.setState({ txtID: e.target.value }) }} readOnly={true} /></td>
+                <td><input className="product-detail-input" type="text" value={this.state.txtID} onChange={(e) => { this.setState({ txtID: e.target.value }) }} readOnly={true} /></td>
               </tr>
               <tr>
                 <td>Name</td>
-                <td><input type="text" value={this.state.txtName} onChange={(e) => { this.setState({ txtName: e.target.value }) }} /></td>
+                <td><input className="product-detail-input" type="text" value={this.state.txtName} onChange={(e) => { this.setState({ txtName: e.target.value }) }} /></td>
               </tr>
               <tr>
                 <td>Price</td>
-                <td><input type="text" value={this.state.txtPrice} onChange={(e) => { this.setState({ txtPrice: e.target.value }) }} /></td>
+                <td><input className="product-detail-input" type="text" value={this.state.txtPrice} onChange={(e) => { this.setState({ txtPrice: e.target.value }) }} /></td>
               </tr>
               <tr>
                 <td>Image</td>
                 <td><input type="file" name="fileImage" accept="image/jpeg, image/png, image/gif" onChange={(e) => this.previewImage(e)} /></td>
               </tr>
+              {/* <tr>
+                <td>Image Details</td>
+                <td><input type="file" name="fileImage" accept="image/jpeg, image/png, image/gif" onChange={(e) => this.previewImageDetails(e)} multiple /></td>
+              </tr> */}
               <tr>
                 <td>Category</td>
-                <td><select onChange={(e) => { this.setState({ cmbCategory: e.target.value }) }}><option value='select'>--select--</option>{cates}</select></td>
+                <td><select className="product-detail-select" onChange={(e) => { this.setState({ cmbCategory: e.target.value }) }}><option value='select'>--select--</option>{cates}</select></td>
               </tr>
               <tr>
                 <td></td>
                 <td>
-                  <input type="submit" value="ADD NEW" onClick={(e) => this.btnAddClick(e)} />
-                  <input type="submit" value="UPDATE" onClick={(e) => this.btnUpdateClick(e)} />
-                  <input type="submit" value="DELETE" onClick={(e) => this.btnDeleteClick(e)} />
+                  <input className="product-detail-button" type="submit" value="ADD NEW" onClick={(e) => this.btnAddClick(e)} />
+                  <input className="product-detail-button" type="submit" value="UPDATE" onClick={(e) => this.btnUpdateClick(e)} />
+                  <input className="product-detail-button" type="submit" value="DELETE" onClick={(e) => this.btnDeleteClick(e)} />
                 </td>
               </tr>
               <tr>
-                <td colSpan="2"><img src={this.state.imgProduct} width="300px" height="300px" alt="" /></td>
+                <td colSpan="2"><img className="product-image" src={this.state.imgProduct} width="300px" height="300px" alt="" /></td>
               </tr>
+              {/* <tr>
+                <td colSpan="2">
+                  {this.state.imgDetails.map((image, index)=>(
+                    <img key={index} src={image} width="100px" height="100px" alt=""></img>
+                  ))}
+                </td>
+              </tr> */}
             </tbody>
           </table>
         </form>
@@ -77,6 +89,7 @@ class ProductDetail extends Component {
         txtPrice: this.props.item.price,
         cmbCategory: this.props.item.category._id,
         imgProduct: 'data:image/jpg;base64,' + this.props.item.image
+        // imgDetails: this.props.item.imgDetails.map((image)=>'data:image/jpg;base64,'+image)
       });
     }
   }
@@ -91,12 +104,32 @@ class ProductDetail extends Component {
       reader.readAsDataURL(file);
     }
   }
+  // previewImageDetails(e){
+  //   const files =e.target.files;
+  //   if(files.length>0){
+  //     const newImages=[];
+  //     const promise = Array.from(files).map((file)=>{
+  //       return new Promise((resolve)=>{
+  //         const reader = new FileReader();
+  //         reader.onload =(evt)=>{
+  //           newImages.push(evt.target.result);
+  //           resolve();
+  //         };
+  //         reader.readAsDataURL(file);
+  //       });
+  //     });
+  //     Promise.all(promise).then(()=>{
+  //       this.setState({imgDetails: newImages});
+  //     });
+  //   }
+  // }
   btnAddClick(e) {
     e.preventDefault();
     const name = this.state.txtName;
     const price = parseInt(this.state.txtPrice);
     const category = this.state.cmbCategory;
     const image = this.state.imgProduct.replace(/^data:image\/[a-z]+;base64,/, ''); // remove "data:image/...;base64,"
+    // const imageDetails = this.state.imgDetails.map((img)=>img.replace(/^data:image\/[a-z]+;base,/,'')); //remove "data:image/...;base64,"
     if (name && price && category && category !== 'select' && image) {
       const prod = { name: name, price: price, category: category, image: image };
       this.apiPostProduct(prod);
@@ -111,6 +144,7 @@ class ProductDetail extends Component {
     const price = parseInt(this.state.txtPrice);
     const category = this.state.cmbCategory;
     const image = this.state.imgProduct.replace(/^data:image\/[a-z]+;base64,/, ''); // remove "data:image/...;base64,"
+    // const imageDetails = this.state.imgDetails.map((img) => img.replace(/^data:image\/[a-z]+;base64,/, '')); // remove "data:image/...;base64,"
     if (id && name && price && category && category !== 'select' && image) {
       const prod = { name: name, price: price, category: category, image: image };
       this.apiPutProduct(id, prod);

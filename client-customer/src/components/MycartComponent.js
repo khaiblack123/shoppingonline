@@ -3,31 +3,34 @@ import MyContext from '../contexts/MyContext';
 import CartUtil from '../utils/CartUtil';
 import axios from 'axios';
 import withRouter from '../utils/withRouter';
+import './MyCart.css'; // Import the new CSS file
 
 class Mycart extends Component {
   static contextType = MyContext; // using this.context to access global state
+
   render() {
-    const mycart = this.context.mycart.map((item, index) => {
+    const mycartItems = this.context.mycart.map((item, index) => {
       return (
-        <tr key={item.product._id} className="datatable">
+        <tr key={item.product._id} className="mycart-row">
           <td>{index + 1}</td>
           <td>{item.product._id}</td>
           <td>{item.product.name}</td>
           <td>{item.product.category.name}</td>
-          <td><img src={"data:image/jpg;base64," + item.product.image} width="70px" height="70px" alt="" /></td>
-          <td>{item.product.price}</td>
+          <td><img src={"data:image/jpg;base64," + item.product.image} width="70" height="70" alt="" /></td>
+          <td>${item.product.price.toFixed(2)}</td>
           <td>{item.quantity}</td>
-          <td>{item.product.price * item.quantity}</td>
-          <td><span className="link" onClick={() => this.lnkRemoveClick(item.product._id)}>Remove</span></td>
+          <td>${(item.product.price * item.quantity).toFixed(2)}</td>
+          <td><span className="mycart-link" onClick={() => this.handleRemoveClick(item.product._id)}>Remove</span></td>
         </tr>
       );
     });
+
     return (
-      <div className="align-center">
-        <h2 className="text-center">ITEM LIST</h2>
-        <table className="datatable" border="1">
-          <tbody>
-            <tr className="datatable">
+      <div className="mycart-container">
+        <h2 className="mycart-title">ITEM LIST</h2>
+        <table className="mycart-table" border="1">
+          <thead>
+            <tr>
               <th>No.</th>
               <th>ID</th>
               <th>Name</th>
@@ -38,28 +41,31 @@ class Mycart extends Component {
               <th>Amount</th>
               <th>Action</th>
             </tr>
-            {mycart}
+          </thead>
+          <tbody>
+            {mycartItems}
             <tr>
-              <td colSpan="6"></td>
-              <td>Total</td>
-              <td>{CartUtil.getTotal(this.context.mycart)}</td>
-              <td><span className="link" onClick={() => this.lnkCheckoutClick()}>CHECKOUT</span></td>
+              <td colSpan="7" className="mycart-total-label">Total</td>
+              <td>${CartUtil.getTotal(this.context.mycart).toFixed(2)}</td>
+              <td><span className="mycart-link" onClick={() => this.handleCheckoutClick()}>CHECKOUT</span></td>
             </tr>
           </tbody>
         </table>
       </div>
     );
   }
+
   // event-handlers
-  lnkRemoveClick(id) {
-    const mycart = this.context.mycart;
+  handleRemoveClick(id) {
+    const mycart = this.context.mycart.slice(); // Create a copy of the array
     const index = mycart.findIndex(x => x.product._id === id);
     if (index !== -1) { // found, remove item
       mycart.splice(index, 1);
       this.context.setMycart(mycart);
     }
   }
-  lnkCheckoutClick() {
+
+  handleCheckoutClick() {
     if (window.confirm('ARE YOU SURE?')) {
       if (this.context.mycart.length > 0) {
         const total = CartUtil.getTotal(this.context.mycart);
@@ -75,6 +81,7 @@ class Mycart extends Component {
       }
     }
   }
+
   // apis
   apiCheckout(total, items, customer) {
     const body = { total: total, items: items, customer: customer };
@@ -82,13 +89,14 @@ class Mycart extends Component {
     axios.post('/api/customer/checkout', body, config).then((res) => {
       const result = res.data;
       if (result) {
-        alert('OK BABY!');
+        alert('Checkout successful!');
         this.context.setMycart([]);
         this.props.navigate('/home');
       } else {
-        alert('SORRY BABY!');
+        alert('Checkout failed!');
       }
     });
   }
 }
+
 export default withRouter(Mycart);

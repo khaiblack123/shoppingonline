@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import MyContext from '../contexts/MyContext';
 import ProductDetail from './ProductDetailComponent';
+import './Product.css'; // Import the CSS file
 
 class Product extends Component {
   static contextType = MyContext; // using this.context to access global state
@@ -17,30 +18,30 @@ class Product extends Component {
   render() {
     const prods = this.state.products.map((item) => {
       return (
-        <tr key={item._id} className="datatable" onClick={() => this.trItemClick(item)}>
+        <tr key={item._id} className="product-row" onClick={() => this.trItemClick(item)}>
           <td>{item._id}</td>
           <td>{item.name}</td>
           <td>{item.price}</td>
           <td>{new Date(item.cdate).toLocaleString()}</td>
           <td>{item.category.name}</td>
-          <td><img src={"data:image/jpg;base64," + item.image} width="100px" height="100px" alt="" /></td>
+          <td><img src={"data:image/jpg;base64," + item.image} className="product-image" alt="" /></td>
         </tr>
       );
     });
     const pagination = Array.from({ length: this.state.noPages }, (_, index) => {
       if ((index + 1) === this.state.curPage) {
-        return (<span key={index}>| <b>{index + 1}</b> |</span>);
+        return (<span key={index} className="pagination-current">| <b>{index + 1}</b> |</span>);
       } else {
-        return (<span key={index} className="link" onClick={() => this.lnkPageClick(index + 1)}>| {index + 1} |</span>);
+        return (<span key={index} className="pagination-link" onClick={() => this.lnkPageClick(index + 1)}>| {index + 1} |</span>);
       }
     });
     return (
-      <div>
-        <div className="float-left">
-          <h2 className="text-center">PRODUCT LIST</h2>
-          <table className="datatable" border="1">
-            <tbody>
-              <tr className="datatable">
+      <div className="product-container">
+        <div className="product-header">
+          <h2 className="product-title">PRODUCT LIST</h2>
+          <table className="product-table" border="1">
+            <thead>
+              <tr className="product-header-row">
                 <th>ID</th>
                 <th>Name</th>
                 <th>Price</th>
@@ -48,16 +49,16 @@ class Product extends Component {
                 <th>Category</th>
                 <th>Image</th>
               </tr>
+            </thead>
+            <tbody>
               {prods}
               <tr>
-                <td colSpan="6">{pagination}</td>
+                <td colSpan="6" className="pagination-container">{pagination}</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div className="inline" />
         <ProductDetail item={this.state.itemSelected} curPage={this.state.curPage} updateProducts={this.updateProducts} />
-        <div className="float-clear" />
       </div>
     );
   }

@@ -1,0 +1,56 @@
+/* mycart.css */
+
+/* Base styles */
+.mycart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff; /* White background */
+}
+
+.mycart-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #343a40; /* Dark color for text */
+}
+
+.mycart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.mycart-table th, .mycart-table td {
+    padding: 10px;
+    text-align: center;
+}
+
+.mycart-row {
+    background-color: #f8f9fa; /* Light grey background for rows */
+    border-bottom: 1px solid #dcdcdc; /* Subtle border for rows */
+}
+
+.mycart-row:nth-child(even) {
+    background-color: #e9ecef; /* Slightly darker grey for alternate rows */
+}
+
+.mycart-row img {
+    border-radius: 4px; /* Rounded corners for images */
+}
+
+.mycart-total-label {
+    font-weight: bold;
+}
+
+.mycart-link {
+    color: #007bff; /* Blue color for links */
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.mycart-link:hover {
+    text-decoration: underline; /* Underline on hover */
+    color: #0056b3; /* Darker blue on hover */
+}

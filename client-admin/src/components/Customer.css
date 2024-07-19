@@ -1,0 +1,67 @@
+/* Container for the customer component */
+.customer-container {
+    padding: 20px;
+    background-color: #e3f2fd; /* Light blue background */
+    color: #000000; /* Dark text color for better readability */
+}
+
+/* Styling for customer list section */
+.customer-list {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #0d47a1; /* Darker blue for the title */
+}
+
+/* Table styling for customers */
+.customer-table, .order-table, .order-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #000000; /* Dark text color in table */
+}
+
+.customer-table th, .order-table th, .order-detail-table th {
+    background-color: #007bff; /* Blue background for header */
+    color: #ffffff; /* White text color for header */
+    padding: 10px;
+}
+
+.customer-table td, .order-table td, .order-detail-table td {
+    padding: 8px;
+    border: 1px solid #90caf9; /* Light blue border for table cells */
+}
+
+/* Row styling for customers */
+.customer-row:hover, .order-row:hover {
+    background-color: #b3e5fc; /* Light blue for rows on hover */
+    cursor: pointer;
+}
+
+/* Action link styling */
+.action-link {
+    color: #007bff; /* Blue color for action links */
+    cursor: pointer;
+}
+
+.action-link:hover {
+    text-decoration: underline;
+}
+
+/* Row styling for order items */
+.order-item-row {
+    border-bottom: 1px solid #90caf9; /* Light blue border for order item rows */
+}
+
+.order-detail {
+    margin-top: 20px;
+}
+
+.order-detail img {
+    border-radius: 4px; /* Rounded corners for images */
+    border: 1px solid #90caf9; /* Light blue border for images */
+}

@@ -1,0 +1,64 @@
+/* inform.css */
+
+.inform-container {
+    border-bottom: 2px solid #ccc;
+    padding: 15px 0;
+    font-size: 16px;
+    color: #444;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.inform-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.inform-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.inform-left a, 
+.inform-right a {
+    color: #007BFF;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.inform-left a:hover, 
+.inform-right a:hover {
+    color: #fff;
+    background-color: #007BFF;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.inform-left b,
+.inform-right b {
+    font-weight: bold;
+    color: #000;
+}
+
+.clear-float {
+    clear: both;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .inform-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .inform-left, .inform-right {
+        margin-bottom: 10px;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

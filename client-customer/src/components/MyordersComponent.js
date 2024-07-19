@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import MyContext from '../contexts/MyContext';
+import './Myorders.css'; // Import the new CSS file
 
 class Myorders extends Component {
   static contextType = MyContext; // using this.context to access global state
@@ -12,92 +13,98 @@ class Myorders extends Component {
       order: null
     };
   }
+
   render() {
     if (this.context.token === '') return (<Navigate replace to='/login' />);
-    const orders = this.state.orders.map((item) => {
-      return (
-        <tr key={item._id} className="datatable" onClick={() => this.trItemClick(item)}>
-          <td>{item._id}</td>
-          <td>{new Date(item.cdate).toLocaleString()}</td>
-          <td>{item.customer.name}</td>
-          <td>{item.customer.phone}</td>
-          <td>{item.total}</td>
-          <td>{item.status}</td>
-        </tr>
-      );
-    });
-    if (this.state.order) {
-      var items = this.state.order.items.map((item, index) => {
-        return (
-          <tr key={item.product._id} className="datatable">
-            <td>{index + 1}</td>
-            <td>{item.product._id}</td>
-            <td>{item.product.name}</td>
-            <td><img src={"data:image/jpg;base64," + item.product.image} width="70px" height="70px" alt="" /></td>
-            <td>{item.product.price}</td>
-            <td>{item.quantity}</td>
-            <td>{item.product.price * item.quantity}</td>
-          </tr>
-        );
-      });
-    }
+    
+    const orderRows = this.state.orders.map((item) => (
+      <tr key={item._id} className="order-row" onClick={() => this.handleOrderClick(item)}>
+        <td>{item._id}</td>
+        <td>{new Date(item.cdate).toLocaleString()}</td>
+        <td>{item.customer.name}</td>
+        <td>{item.customer.phone}</td>
+        <td>${item.total.toFixed(2)}</td>
+        <td>{item.status}</td>
+      </tr>
+    ));
+
+    const itemRows = this.state.order ? this.state.order.items.map((item, index) => (
+      <tr key={item.product._id} className="order-detail-row">
+        <td>{index + 1}</td>
+        <td>{item.product._id}</td>
+        <td>{item.product.name}</td>
+        <td><img src={"data:image/jpg;base64," + item.product.image} width="70" height="70" alt="" /></td>
+        <td>${item.product.price.toFixed(2)}</td>
+        <td>{item.quantity}</td>
+        <td>${(item.product.price * item.quantity).toFixed(2)}</td>
+      </tr>
+    )) : null;
+
     return (
-      <div>
-        <div className="align-center">
-          <h2 className="text-center">ORDER LIST</h2>
-          <table className="datatable" border="1">
-            <tbody>
-              <tr className="datatable">
+      <div className="myorders-container">
+        <div className="myorders-list">
+          <h2 className="myorders-title">Order List</h2>
+          <table className="myorders-table">
+            <thead>
+              <tr>
                 <th>ID</th>
-                <th>Creation date</th>
-                <th>Cust.name</th>
-                <th>Cust.phone</th>
+                <th>Creation Date</th>
+                <th>Customer Name</th>
+                <th>Customer Phone</th>
                 <th>Total</th>
                 <th>Status</th>
               </tr>
-              {orders}
+            </thead>
+            <tbody>
+              {orderRows}
             </tbody>
           </table>
         </div>
-        {this.state.order ?
-          <div className="align-center">
-            <h2 className="text-center">ORDER DETAIL</h2>
-            <table className="datatable" border="1">
-              <tbody>
-                <tr className="datatable">
+        {this.state.order &&
+          <div className="myorders-detail">
+            <h2 className="myorders-title">Order Detail</h2>
+            <table className="myorders-table">
+              <thead>
+                <tr>
                   <th>No.</th>
-                  <th>Prod.ID</th>
-                  <th>Prod.name</th>
+                  <th>Product ID</th>
+                  <th>Product Name</th>
                   <th>Image</th>
                   <th>Price</th>
                   <th>Quantity</th>
                   <th>Amount</th>
                 </tr>
-                {items}
+              </thead>
+              <tbody>
+                {itemRows}
               </tbody>
             </table>
           </div>
-          : <div />}
+        }
       </div>
     );
   }
+
   componentDidMount() {
     if (this.context.customer) {
       const cid = this.context.customer._id;
-      this.apiGetOrdersByCustID(cid);
+      this.fetchOrdersByCustomerId(cid);
     }
   }
+
   // event-handlers
-  trItemClick(item) {
+  handleOrderClick(item) {
     this.setState({ order: item });
   }
+
   // apis
-  apiGetOrdersByCustID(cid) {
+  fetchOrdersByCustomerId(cid) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.get('/api/customer/orders/customer/' + cid, config).then((res) => {
+    axios.get(`/api/customer/orders/customer/${cid}`, config).then((res) => {
       const result = res.data;
       this.setState({ orders: result });
     });
   }
 }
+
 export default Myorders;

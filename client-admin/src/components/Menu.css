@@ -1,0 +1,115 @@
+/* menu.css */
+
+/* Base styles */
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: #ffffff; /* White background similar to Inform */
+    border-bottom: 2px solid #dcdcdc; /* Subtle border similar to Inform */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.menu-links {
+    display: flex;
+    align-items: center;
+}
+
+.menu-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    margin-right: 20px;
+    position: relative; /* For positioning the hover effect */
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: #343a40; /* Dark color for text similar to Inform */
+    font-size: 16px; /* Consistent font size with Inform */
+    font-weight: 500;
+    padding: 10px 15px; /* Add padding for hover effect */
+    display: inline-block; /* To ensure padding is respected */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Transition for hover effect */
+    border-radius: 4px; /* Slightly rounded corners for consistency */
+}
+
+.menu-item a:hover {
+    color: #ffffff; /* Change text color on hover */
+    background-color: #007bff; /* Blue background for hover effect */
+    border-radius: 4px; /* Rounded corners for the hover effect */
+}
+
+/* Styles for the logout link */
+.menu-user-info {
+    display: flex;
+    align-items: center;
+}
+
+.menu-user-info b {
+    margin: 0 10px;
+    color: #343a40; /* Dark color for user info */
+}
+
+.menu-user-info a {
+    text-decoration: none;
+    color: #007bff; /* Blue color for the logout link */
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 15px; /* Add padding for consistency */
+    border-radius: 4px; /* Slightly rounded corners */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Transition for hover effect */
+}
+
+.menu-user-info a:hover {
+    color: #ffffff; /* Change text color on hover */
+    background-color: #0056b3; /* Darker blue for hover effect */
+    text-decoration: none; /* Remove underline on hover */
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    border: 1px solid #dcdcdc;
+    border-radius: 25px;
+    background-color: #f8f9fa; /* Light grey background similar to Inform */
+    padding: 5px;
+}
+
+.search-form:hover {
+    border-color: #007bff; /* Blue border on hover */
+}
+
+.search-input {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 25px 0 0 25px; /* Rounded corners for input */
+    font-size: 14px;
+    flex-grow: 1;
+    outline: none; /* Remove outline */
+}
+
+.search-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0 25px 25px 0; /* Rounded corners for button */
+    background-color: #007bff; /* Blue button similar to Inform */
+    color: #ffffff; /* White text */
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transition for hover effect */
+}
+
+.search-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.clearfix {
+    clear: both;
+}

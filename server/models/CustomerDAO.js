@@ -1,4 +1,5 @@
 require('../utils/MongooseUtil');
+const { selectByCount } = require('./CategoryDAO');
 const Models = require('./Models');
 
 const CustomerDAO = {
@@ -37,6 +38,22 @@ const CustomerDAO = {
   async selectByID(_id) {
     const customer = await Models.Customer.findById(_id).exec();
     return customer;
+  },
+  async selectByEmail(email){
+    const query = {email:email};
+    const customer = await Models.Customer.findOne(query);
+    return customer;
+  },
+  async resetpwd(_id, token, password){
+    const query = {_id: _id, token:token };
+    const newvalues = {password:password};
+    const result =await Models.Customer.findOneAndUpdate(query, newvalues, {new:true});
+    return result;
+  },
+  async selectByCount(){
+    const query ={};
+    const noCustomers =await Models.Customer.find(query).count().exec();
+    return noCustomers;
   }
 };
 module.exports = CustomerDAO;

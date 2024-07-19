@@ -1,0 +1,64 @@
+/* myorders.css */
+
+/* Base styles */
+.myorders-container {
+    padding: 20px;
+    background-color: #e3f2fd; /* Light blue background */
+    color: #000000; /* Dark text color for better readability */
+}
+
+.myorders-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #0d47a1; /* Darker blue for the title */
+}
+
+.myorders-list, .myorders-detail {
+    margin-bottom: 30px;
+}
+
+.myorders-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #000000; /* Dark text color in table */
+}
+
+.myorders-table th, .myorders-table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #90caf9; /* Light blue border for table cells */
+}
+
+.order-row {
+    background-color: #b3e5fc; /* Light blue for rows */
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.order-row:nth-child(even) {
+    background-color: #b3e5fc; /* Consistent light blue for even rows */
+}
+
+.order-row:hover {
+    background-color: #81d4fa; /* Slightly darker blue on hover */
+}
+
+.order-detail-row {
+    background-color: #b3e5fc; /* Light blue for detail rows */
+    transition: background-color 0.3s ease;
+}
+
+.order-detail-row:nth-child(even) {
+    background-color: #b3e5fc; /* Consistent light blue for even rows */
+}
+
+.order-detail-row:hover {
+    background-color: #81d4fa; /* Slightly darker blue on hover */
+}
+
+.order-detail-row img {
+    border-radius: 8px; /* Rounded corners for images */
+    border: 2px solid #90caf9; /* Light blue border for images */
+}

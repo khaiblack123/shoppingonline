@@ -1,47 +1,92 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import './Signup.css'; // Import CSS file
 
-class Signup extends Component {
+class SignupPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      txtUsername: '',
-      txtPassword: '',
-      txtName: '',
-      txtPhone: '',
-      txtEmail: ''
+      username: '',
+      password: '',
+      name: '',
+      phone: '',
+      email: ''
     };
   }
+
   render() {
     return (
-      <div className="align-center">
-        <h2 className="text-center">SIGN-UP</h2>
-        <form>
-          <table className="align-center">
+      <div className="signup-container">
+        <h2 className="signup-title">Sign Up</h2>
+        <form className="signup-form">
+          <table className="signup-table">
             <tbody>
               <tr>
-                <td>Username</td>
-                <td><input type="text" value={this.state.txtUsername} onChange={(e) => { this.setState({ txtUsername: e.target.value }) }} /></td>
+                <td className="label">Username</td>
+                <td>
+                  <input 
+                    type="text" 
+                    value={this.state.username} 
+                    onChange={(e) => this.setState({ username: e.target.value })} 
+                    className="input-field"
+                  />
+                </td>
               </tr>
               <tr>
-                <td>Password</td>
-                <td><input type="password" value={this.state.txtPassword} onChange={(e) => { this.setState({ txtPassword: e.target.value }) }} /></td>
+                <td className="label">Password</td>
+                <td>
+                  <input 
+                    type="password" 
+                    value={this.state.password} 
+                    onChange={(e) => this.setState({ password: e.target.value })} 
+                    className="input-field"
+                  />
+                </td>
               </tr>
               <tr>
-                <td>Name</td>
-                <td><input type="text" value={this.state.txtName} onChange={(e) => { this.setState({ txtName: e.target.value }) }} /></td>
+                <td className="label">Name</td>
+                <td>
+                  <input 
+                    type="text" 
+                    value={this.state.name} 
+                    onChange={(e) => this.setState({ name: e.target.value })} 
+                    className="input-field"
+                  />
+                </td>
               </tr>
               <tr>
-                <td>Phone</td>
-                <td><input type="tel" value={this.state.txtPhone} onChange={(e) => { this.setState({ txtPhone: e.target.value }) }} /></td>
+                <td className="label">Phone</td>
+                <td>
+                  <input 
+                    type="tel" 
+                    value={this.state.phone} 
+                    onChange={(e) => this.setState({ phone: e.target.value })} 
+                    className="input-field"
+                  />
+                </td>
               </tr>
               <tr>
-                <td>Email</td>
-                <td><input type="email" value={this.state.txtEmail} onChange={(e) => { this.setState({ txtEmail: e.target.value }) }} /></td>
+                <td className="label">Email</td>
+                <td>
+                  <input 
+                    type="email" 
+                    value={this.state.email} 
+                    onChange={(e) => this.setState({ email: e.target.value })} 
+                    className="input-field"
+                  />
+                </td>
               </tr>
               <tr>
                 <td></td>
-                <td><input type="submit" value="SIGN-UP" onClick={(e) => this.btnSignupClick(e)} /></td>
+                <td>
+                  <button 
+                    type="submit" 
+                    onClick={(e) => this.handleSignupClick(e)} 
+                    className="submit-button"
+                  >
+                    Sign Up
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -49,22 +94,20 @@ class Signup extends Component {
       </div>
     );
   }
-  // event-handlers
-  btnSignupClick(e) {
+
+  // Event-handlers
+  handleSignupClick(e) {
     e.preventDefault();
-    const username = this.state.txtUsername;
-    const password = this.state.txtPassword;
-    const name = this.state.txtName;
-    const phone = this.state.txtPhone;
-    const email = this.state.txtEmail;
+    const { username, password, name, phone, email } = this.state;
     if (username && password && name && phone && email) {
-      const account = { username: username, password: password, name: name, phone: phone, email: email };
+      const account = { username, password, name, phone, email };
       this.apiSignup(account);
     } else {
-      alert('Please input username and password and name and phone and email');
+      alert('Please input all required fields.');
     }
   }
-  // apis
+
+  // APIs
   apiSignup(account) {
     axios.post('/api/customer/signup', account).then((res) => {
       const result = res.data;
@@ -72,4 +115,5 @@ class Signup extends Component {
     });
   }
 }
-export default Signup;
+
+export default SignupPage;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import MyContext from '../contexts/MyContext';
+import './Order.css'; // Import the CSS file
 
 class Order extends Component {
   static contextType = MyContext; // using this.context to access global state
@@ -14,7 +15,7 @@ class Order extends Component {
   render() {
     const orders = this.state.orders.map((item) => {
       return (
-        <tr key={item._id} className="datatable" onClick={() => this.trItemClick(item)}>
+        <tr key={item._id} className="order-item" onClick={() => this.trItemClick(item)}>
           <td>{item._id}</td>
           <td>{new Date(item.cdate).toLocaleString()}</td>
           <td>{item.customer.name}</td>
@@ -23,7 +24,7 @@ class Order extends Component {
           <td>{item.status}</td>
           <td>
             {item.status === 'PENDING' ?
-              <div><span className="link" onClick={() => this.lnkApproveClick(item._id)}>APPROVE</span> || <span className="link" onClick={() => this.lnkCancelClick(item._id)}>CANCEL</span></div>
+              <div><span className="link-button" onClick={() => this.lnkApproveClick(item._id)}>APPROVE</span> || <span className="link-button" onClick={() => this.lnkCancelClick(item._id)}>CANCEL</span></div>
               : <div />}
           </td>
         </tr>
@@ -32,11 +33,11 @@ class Order extends Component {
     if (this.state.order) {
       var items = this.state.order.items.map((item, index) => {
         return (
-          <tr key={item.product._id} className="datatable">
+          <tr key={item.product._id} className="order-detail-item">
             <td>{index + 1}</td>
             <td>{item.product._id}</td>
             <td>{item.product.name}</td>
-            <td><img src={"data:image/jpg;base64," + item.product.image} width="70px" height="70px" alt="" /></td>
+            <td><img src={"data:image/jpg;base64," + item.product.image} className="product-image" alt="" /></td>
             <td>{item.product.price}</td>
             <td>{item.quantity}</td>
             <td>{item.product.price * item.quantity}</td>
@@ -46,11 +47,11 @@ class Order extends Component {
     }
     return (
       <div>
-        <div className="align-center">
-          <h2 className="text-center">ORDER LIST</h2>
-          <table className="datatable" border="1">
-            <tbody>
-              <tr className="datatable">
+        <div className="order-list-container">
+          <h2 className="order-list-title">ORDER LIST</h2>
+          <table className="order-table" border="1">
+            <thead>
+              <tr className="order-header">
                 <th>ID</th>
                 <th>Creation date</th>
                 <th>Cust.name</th>
@@ -59,16 +60,18 @@ class Order extends Component {
                 <th>Status</th>
                 <th>Action</th>
               </tr>
+            </thead>
+            <tbody>
               {orders}
             </tbody>
           </table>
         </div>
         {this.state.order ?
-          <div className="align-center">
-            <h2 className="text-center">ORDER DETAIL</h2>
-            <table className="datatable" border="1">
-              <tbody>
-                <tr className="datatable">
+          <div className="order-detail-container">
+            <h2 className="order-detail-title">ORDER DETAIL</h2>
+            <table className="order-detail-table" border="1">
+              <thead>
+                <tr className="order-detail-header">
                   <th>No.</th>
                   <th>Prod.ID</th>
                   <th>Prod.name</th>
@@ -77,6 +80,8 @@ class Order extends Component {
                   <th>Quantity</th>
                   <th>Amount</th>
                 </tr>
+              </thead>
+              <tbody>
                 {items}
               </tbody>
             </table>
@@ -119,4 +124,5 @@ class Order extends Component {
     });
   }
 }
+
 export default Order;

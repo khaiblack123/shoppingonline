@@ -25,6 +25,11 @@ const CategoryDAO = {
   async selectByID(_id) {
     const category = await Models.Category.findById(_id).exec();
     return category;
+  },
+  async selectByCount(){
+    const query={};
+    const noCategories = await Models.Category.find(query).count().exec();
+    return noCategories;
   }
 };
 module.exports = CategoryDAO;

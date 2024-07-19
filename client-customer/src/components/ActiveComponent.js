@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import './Active.css';
 
 class Active extends Component {
   constructor(props) {
@@ -11,22 +12,22 @@ class Active extends Component {
   }
   render() {
     return (
-      <div className="align-center">
-        <h2 className="text-center">ACTIVE ACCOUNT</h2>
-        <form>
-          <table className="align-center">
+      <div className="active-container">
+        <h2 className="active-title">Activate Account</h2>
+        <form className="active-form">
+          <table className="active-table">
             <tbody>
               <tr>
-                <td>ID</td>
-                <td><input type="text" value={this.state.txtID} onChange={(e) => { this.setState({ txtID: e.target.value }) }} /></td>
+                <td className="active-label">ID</td>
+                <td><input className="active-input" type="text" value={this.state.txtID} onChange={(e) => { this.setState({ txtID: e.target.value }) }} /></td>
               </tr>
               <tr>
-                <td>Token</td>
-                <td><input type="text" value={this.state.txtToken} onChange={(e) => { this.setState({ txtToken: e.target.value }) }} /></td>
+                <td className="active-label">Token</td>
+                <td><input className="active-input" type="text" value={this.state.txtToken} onChange={(e) => { this.setState({ txtToken: e.target.value }) }} /></td>
               </tr>
               <tr>
                 <td></td>
-                <td><input type="submit" value="ACTIVE" onClick={(e) => this.btnActiveClick(e)} /></td>
+                <td><input className="active-button" type="submit" value="Activate" onClick={(e) => this.btnActiveClick(e)} /></td>
               </tr>
             </tbody>
           </table>

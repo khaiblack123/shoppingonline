@@ -1,4 +1,5 @@
 require('../utils/MongooseUtil');
+const { selectByCount } = require('./CategoryDAO');
 const Models = require('./Models');
 
 const OrderDAO = {
@@ -23,6 +24,22 @@ const OrderDAO = {
     const newvalues = { status: newStatus };
     const result = await Models.Order.findByIdAndUpdate(_id, newvalues, { new: true });
     return result;
+  },
+  async selectByCount(){
+    const query ={};
+    const noOrders = await Models.Order.find(query).count().exec();
+    return noOrders;
+  },
+  async selectByCountStatus(status){
+    const query = {status:status};
+    const noOrders =await Models.Order.find(query).count().exec();
+    return noOrders;
+  },
+  async sumTotalApproved(){
+    const query ={status:'APPROVED'};
+    const orders =await Models.Order.find(query).exec();
+    const sum= orders.reduce((sum, order)=>sum+order.total,0);
+    return sum; 
   }
 };
 module.exports = OrderDAO;

@@ -1,0 +1,61 @@
+/* reset-password.css */
+
+/* Container for the reset password page */
+.reset-password-container {
+    padding: 20px;
+    background-color: #f9f9f9; /* Light gray background */
+    max-width: 600px;
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reset-password-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333; /* Dark text color */
+}
+
+.reset-password-form {
+    width: 100%;
+}
+
+.reset-password-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reset-password-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.label {
+    text-align: right;
+    font-weight: bold;
+}
+
+.input-field {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff; /* Blue color for button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

@@ -1,0 +1,70 @@
+/* Container styling for order list and order detail sections */
+.order-list-container,
+.order-detail-container {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1200px;
+  background-color: #e3f2fd; /* Light blue background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Title styling for order list and order detail sections */
+.order-list-title,
+.order-detail-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #0d47a1; /* Darker blue for the title */
+  font-weight: bold;
+}
+
+/* Table styling for orders and order details */
+.order-table,
+.order-detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #000000; /* Dark text color for better readability */
+}
+
+/* Header styling for orders and order details */
+.order-header,
+.order-detail-header {
+  background-color: #007bff; /* Blue background for header */
+  color: #ffffff; /* White text color for header */
+  padding: 10px;
+}
+
+/* Item row styling for orders and order details */
+.order-item,
+.order-detail-item {
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.order-item:hover,
+.order-detail-item:hover {
+  background-color: #b3e5fc; /* Light blue background on hover */
+}
+
+/* Styling for clickable links */
+.link-button {
+  color: #007bff; /* Blue color for links */
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.link-button:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+
+/* Styling for product images */
+.product-image {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 4px; /* Rounded corners for images */
+  border: 1px solid #90caf9; /* Light blue border for images */
+}

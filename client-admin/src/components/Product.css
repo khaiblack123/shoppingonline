@@ -1,0 +1,76 @@
+/* Product.css */
+
+/* Base styles */
+.product-container {
+    padding: 20px;
+    background-color: #e3f2fd; /* Light blue background */
+    color: #000000; /* Dark text color for better readability */
+}
+
+.product-header {
+    margin-bottom: 20px;
+}
+
+.product-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #0d47a1; /* Darker blue for the title */
+    margin-bottom: 20px;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #000000; /* Dark text color in table */
+}
+
+.product-table th, .product-table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #90caf9; /* Light blue border for table cells */
+}
+
+.product-row {
+    background-color: #b3e5fc; /* Light blue for rows */
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.product-row:nth-child(even) {
+    background-color: #b3e5fc; /* Consistent light blue for even rows */
+}
+
+.product-row:hover {
+    background-color: #81d4fa; /* Slightly darker blue on hover */
+}
+
+.product-image {
+    border-radius: 8px; /* Rounded corners for images */
+    border: 2px solid #90caf9; /* Light blue border for images */
+    width: 100px;
+    height: 100px;
+    object-fit: cover; /* Maintain aspect ratio and cover the area */
+}
+
+.pagination-container {
+    text-align: center;
+    padding: 10px;
+}
+
+.pagination-link {
+    cursor: pointer;
+    color: #0d47a1; /* Darker blue for pagination links */
+    margin: 0 5px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.pagination-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+.pagination-current {
+    font-weight: bold;
+    color: #0d47a1; /* Darker blue for current page */
+}

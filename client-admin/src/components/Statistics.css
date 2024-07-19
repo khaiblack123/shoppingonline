@@ -1,0 +1,54 @@
+/* Statistics.css */
+
+/* Container for the statistics component */
+.statistics-container {
+    padding: 20px;
+    background-color: #e3f2fd; /* Light blue background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
+/* Title of the statistics section */
+.statistics-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #0d47a1; /* Darker blue for the title */
+}
+
+/* Table styling for statistics */
+.statistics-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.statistics-table td, .statistics-table th {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #90caf9; /* Light blue border */
+}
+
+.statistics-table td {
+    vertical-align: middle;
+}
+
+.statistics-label {
+    text-align: right;
+    font-weight: bold;
+    color: #333;
+}
+
+.statistics-value {
+    font-weight: bold;
+    color: #007bff; /* Blue color for values */
+}
+
+.statistics-sub-label {
+    text-align: right;
+    color: #555;
+}
